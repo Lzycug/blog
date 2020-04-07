@@ -1,7 +1,9 @@
+
 package com.lzycug.aop.config;
 
 import com.lzycug.aop.pojo.SysLog;
 import com.lzycug.aop.service.LogService;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,11 +14,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Objects;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * description：切面类，用于记录操作
@@ -38,7 +41,6 @@ public class LogAspect {
 
     private Method method; // 访问的方法
 
-
     // 方式二：使用切入点表达式注解的方式，在需要记录操作的的地方使用方法名pt1()
     @Pointcut("execution(* com.lzycug.aop.controller.*.*(..))")
     public void pt1() {
@@ -53,10 +55,10 @@ public class LogAspect {
     @Before("execution(* com.lzycug.aop.controller.*.*(..))")
     public void doBefore(JoinPoint joinPoint) throws NoSuchMethodException {
         // 访问时间
-        this.visitTime = new Date();
+        visitTime = new Date();
 
         // 获取访问的类
-        this.aClass = joinPoint.getTarget().getClass();
+        aClass = joinPoint.getTarget().getClass();
 
         // 获取访问的方法名称
         String methodName = joinPoint.getSignature().getName();
@@ -78,10 +80,10 @@ public class LogAspect {
 
     @After("execution(* com.lzycug.aop.controller.*.*(..))")
     public void doAfter(JoinPoint joinPoint) {
-        //获取访问的时长
+        // 获取访问的时长
         long time = new Date().getTime() - visitTime.getTime();
 
-        //获取访问的IP
+        // 获取访问的IP
         String ip = httpServletRequest.getRemoteAddr();
 
         // 获取访问的url
