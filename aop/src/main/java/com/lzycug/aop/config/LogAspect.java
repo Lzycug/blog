@@ -1,9 +1,7 @@
-
 package com.lzycug.aop.config;
 
 import com.lzycug.aop.pojo.SysLog;
 import com.lzycug.aop.service.LogService;
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,12 +12,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Objects;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * description：切面类，用于记录操作
